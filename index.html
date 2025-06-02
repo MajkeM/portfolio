@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>My Website</title>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -16,16 +17,24 @@
         <div class="background-element element-3"></div>
     </div>
 
-    <header>
-        <div class="container">
-            <nav>
+    <div class="cosmo">
+        <div id="edge1" class="edge1"></div>
+        <div id="edge2" class="edge2"></div>
+        <div id="edge3" class="edge3"></div>
+        <div id="edge4" class="edge4"></div>
+    </div>
 
+    <header>
+
+        <div class="container nav-grey">
+            <nav>
+                <img id="logo" class="logo-img" src="./images/logo-withoutBG.png" alt="logo">
                 <div class="nav-links">
-                    <div class="logo"></div>
-                    <a href="#">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact">Contact</a>
+
+                    <a id="a1" class="current-page" id="home-link" href="#">Home</a>
+                    <a id="a2" href="#about">About</a>
+                    <a id="a3" href="#projects">Projects</a>
+                    <button id="contact-link" href="#contact">Contact</button>
                 </div>
             </nav>
         </div>
@@ -37,7 +46,7 @@
                 <article class="box box-1">
 
 
-                    <h1>Hello, I'm Michael <span id="wawe">👋🏻</span></h1>
+                    <h1>Hello, I'm <span class="write-font">Michael</span> <span id="wave">👋🏻</span></h1>
                     <p> I'm a <span class="semibold">frontend developer</span> and <span class="semibold">UI/UX
                             designer</span> passionate about creating
                         smooth, clean, and responsive user interfaces. I specialize in <span class="semibold">React,
@@ -127,50 +136,56 @@
             </div>
         </div>
 
-        <article id="about" class="box box-4">
+        <div id="about"></div>
+
+        <article class="box box-4">
             <div class="box-4-content">
                 <div class="box-4-left">
                     <div class="box-4-header">
                         <img id="sayin-hello" src="./images/man-hello.png" alt="saying hello man">
-                        <h2>About Me</h2>
+                        <h2>About <span class="colorNfont">Me</span></h2>
                         <p>Get to know the person behind the code</p>
+
                     </div>
-                    <div class="box-4-bio">
-                        <p>I'm a passionate <span class="semibold">frontend developer</span> with a keen eye for design
-                            and a love for creating
-                            beautiful, functional web experiences. My journey in web
-                            development started with a
-                            fascination for how things work and a desire to build things that make a difference.</p>
-                        <p>When I'm not coding, you can find me <span class="semibold">exploring new
-                                technologies</span>, contributing to open-source
-                            projects, or enjoying outdoor activities. I believe in continuous learning and staying
-                            updated with the latest trends in web development.</p>
-                    </div>
-                    <div class="box-4-interests">
-                        <h3>My Interests</h3>
-                        <div class="box-4-interest-grid-container">
-                            <div class="box-4-interest-grid">
+                    <div class="about-me-container">
+                        <div class="box-4-bio">
+                            <p class="bio-box">I'm a passionate <span class="semibold">frontend developer</span> with a
+                                keen eye for design and a love for creating beautiful, functional web experiences. My
+                                journey in web development started with a fascination for how things work and a desire
+                                to build things that make a difference.</p>
+                            <p class="bio-box">When I'm not coding, you can find me <span class="semibold">exploring new
+                                    technologies</span>, contributing to open-source projects, or enjoying outdoor
+                                activities. I believe in continuous learning and staying updated with the latest trends
+                                in web development.</p>
+                        </div>
+                        <div class="flexflex">
+                            <h3>Interests</h3>
+                        </div>
+                        <div class="box-4-interest-carousel">
+                            <div class="box-4-interest-container">
                                 <div class="box-4-interest">
                                     <div class="box-4-interest-icon">💻</div>
                                     <h4>Web Development</h4>
-                                    <p>Building modern, responsive websites</p>
+                                    <p>Building modern, responsive websites with clean code and intuitive user
+                                        interfaces. Specializing in React, JavaScript, and modern web technologies.</p>
                                 </div>
                                 <div class="box-4-interest">
                                     <div class="box-4-interest-icon">🎨</div>
                                     <h4>UI/UX Design</h4>
-                                    <p>Creating intuitive user experiences</p>
+                                    <p>Creating intuitive user experiences and beautiful interfaces that combine
+                                        aesthetics with functionality. Focused on user-centered design principles.</p>
                                 </div>
                                 <div class="box-4-interest">
                                     <div class="box-4-interest-icon">📱</div>
                                     <h4>Mobile First</h4>
-                                    <p>Designing for all devices</p>
-                                </div>
-                                <div class="box-4-interest">
-                                    <div class="box-4-interest-icon">🏋️‍♂️</div>
-                                    <h4>Gym & Fitness</h4>
-                                    <p>Staying active and healthy</p>
+                                    <p>Designing and developing with a mobile-first approach to ensure seamless
+                                        experiences across all devices and screen sizes.</p>
                                 </div>
                             </div>
+
+                            <button class="carousel-arrow carousel-prev">←</button>
+                            <button class="carousel-arrow carousel-next">→</button>
+                            <div class="carousel-nav"></div>
                         </div>
                     </div>
                 </div>
@@ -183,7 +198,8 @@
                 <div class="box-3-left">
                     <div class="box-3-header">
                         <h2>My Projects</h2>
-                        <p>Explore my latest work and see how I combine design and development to create engaging user
+                        <p>Explore my latest work and see how I combine design and development to create engaging
+                            user
                             experiences.</p>
                     </div>
                     <div class="box-3-stats">
@@ -294,6 +310,47 @@
     </main>
 
     <script>
+        let logo = document.getElementById("logo");
+
+
+        // Add scroll opacity effect to header
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const maxScroll = 100; // Adjust this value to control when opacity reaches minimum
+
+            // Calculate opacity based on scroll position
+            // Starts at 1 (fully visible) and decreases to 0.3 as you scroll
+            const opacity = Math.max(0, 1 - (scrollPosition / maxScroll));
+
+            logo.style.opacity = opacity;
+        });
+
+        let a1 = document.getElementById("a1");
+        let a2 = document.getElementById("a2");
+        let a3 = document.getElementById("a3");
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+
+            // Remove current-page class from all links
+            [a1, a2, a3].forEach(link => link.classList.remove("current-page"));
+
+            // Add current-page class based on scroll position
+            if (scrollPosition < 600) {
+                a1.classList.add("current-page");
+            } else if (scrollPosition < 900) {
+                a2.classList.add("current-page");
+            } else if (scrollPosition < 2700) {
+                a3.classList.add("current-page");
+            }
+            else {
+
+            }
+        });
+
+
+
+
         const box2 = document.querySelector('.box-2');
         let mouseX = 0;
         let mouseY = 0;
@@ -341,6 +398,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
+
             const form = document.getElementById('contactForm');
             const submitBtn = document.getElementById('submitBtn');
             const btnText = submitBtn.querySelector('.btn-text');
@@ -450,6 +508,7 @@
             });
         });
     </script>
+    <script src="carousel.js"></script>
 </body>
 
 </html>
