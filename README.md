@@ -25,7 +25,7 @@ A modern, responsive portfolio website built with HTML, CSS, and JavaScript. Thi
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/portfolio.git
+git clone https://github.com/michaelmicin/portfolio.git
 ```
 
 2. Open the project in your favorite code editor
@@ -53,6 +53,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Contact
 
-Your Name - your.email@example.com
+Michael Micin - michaelmicin@gmail.com
 
-Project Link: [https://github.com/yourusername/portfolio](https://github.com/yourusername/portfolio)
+Project Link: [https://github.com/michaelmicin/portfolio](https://github.com/michaelmicin/portfolio)
