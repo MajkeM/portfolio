@@ -11,7 +11,6 @@
         content="Portfolio Michaela Mičína – frontend vývojář a UI/UX designér zaměřený na React, JavaScript a čistý design.">
     <meta name="keywords"
         content="frontend developer, UI/UX designér, React, JavaScript, HTML, CSS, webové stránky, design zaměřený na člověka">
-
     <meta name="author" content="Michael Mičín">
     <meta property="og:title" content="Portfolio Michaela Mičína">
     <meta property="og:description"
@@ -21,6 +20,9 @@
 </head>
 
 <body>
+    <!-- Canvas pro dynamické pozadí -->
+    <canvas id="particle-canvas"></canvas>
+
     <img id="languege" class="languege" src="images/en__flag.png" alt="anglický jazyk">
     <div id="notifiaction-mAt" class="notification-mobile-tablet">
         <p class="emoji-notification">✨ 🖥️ ✨</p>
@@ -28,170 +30,254 @@
         <button onclick="closeNotification()" class="close-notification">Zavřít</button>
     </div>
 
-    <div class="starry-bg">
-        <div class="star" style="top:5%;left:10%;animation-delay:0.2s;"></div>
-        <div class="star shiny" style="top:12%;left:22%;animation-delay:0.7s;"></div>
-        <div class="star" style="top:20%;left:80%;animation-delay:1.1s;"></div>
-        <div class="star" style="top:30%;left:40%;animation-delay:0.5s;"></div>
-        <div class="star shiny" style="top:35%;left:60%;animation-delay:1.5s;"></div>
-        <div class="star" style="top:50%;left:15%;animation-delay:0.9s;"></div>
-        <div class="star" style="top:60%;left:70%;animation-delay:1.3s;"></div>
-        <div class="star shiny" style="top:65%;left:30%;animation-delay:0.4s;"></div>
-        <div class="star" style="top:75%;left:55%;animation-delay:1.7s;"></div>
-        <div class="star" style="top:85%;left:85%;animation-delay:0.6s;"></div>
-        <div class="star shiny" style="top:90%;left:10%;animation-delay:1.9s;"></div>
-    </div>
     <header>
-
         <div class="container nav-grey">
             <nav>
-                <img id="logo" class="logo-img" src="./images/logo-withoutBG.png"
-                    alt="Logo Michaela Mičína, frontend developera">
+                <img id="logo" class="logo-img" src="./images/logo-withoutBG.png" alt="Logo Michaela Mičína">
                 <div class="nav-links">
-
-                    <a id="a1" class="current-page" id="home-link" href="#">Zavřít</a>
+                    <a id="dovednosti" class="current-page" href="index.html">Zavřít</a>
                 </div>
             </nav>
         </div>
     </header>
-    <main class="hero-section">
 
-        <!-- Levý sloupec pro Text a Navigaci Karuselu -->
+    <main class="hero-section">
+        <!-- Levý sloupec pro Text a Navigaci -->
         <div class="hero-content">
             <h1 class="hero-title">
                 Interaktivní<br>
-                <span class="highlight-text">Přehlídka Dovedností</span>
+                <span id="skill-title-highlight" class="highlight-text">Přehlídka Dovedností</span>
             </h1>
-            <p class="hero-subtitle">Prozkoumejte technologie, se kterými tvořím digitální zážitky. Pomocí šipek můžete
-                procházet mé klíčové dovednosti.</p>
+            <p class="hero-subtitle">Prozkoumejte technologie, se kterými tvořím. Klikněte na ikony v orbitu nebo
+                použijte šipky.</p>
 
-            <!-- Popisy k jednotlivým dovednostem -->
+            <!-- Popisy k dovednostem - budou dynamicky měněny -->
             <div class="skills-descriptions">
-                <div class="skill-description active" data-skill="0">
-                    <h2>React</h2>
-                    <p>Moderní knihovna pro tvorbu dynamických a rychlých uživatelských rozhraní. Ideální pro
-                        single-page aplikace a komplexní komponenty.</p>
-                </div>
-                <div class="skill-description" data-skill="1">
-                    <h2>JavaScript</h2>
-                    <p>Jazyk, který oživuje webové stránky. Od jednoduchých animací po složitou aplikační logiku na
-                        straně klienta i serveru (Node.js).</p>
-                </div>
-                <div class="skill-description" data-skill="2">
-                    <h2>HTML & CSS</h2>
-                    <p>Základní stavební kameny každého webu. Sémantický HTML5 a moderní CSS3 s použitím Flexbox, Grid a
-                        vlastních animací tvoří základ mé práce.</p>
-                </div>
-                <div class="skill-description" data-skill="3">
-                    <h2>UI/UX Design</h2>
-                    <p>Design zaměřený na člověka. Věřím, že dobrý produkt je nejen funkční, ale i intuitivní a
-                        esteticky příjemný. Používám nástroje jako Figma.</p>
+                <div class="skill-card active" data-skill="0">
+                    <h2 id="skill-name"></h2>
+                    <p id="skill-description"></p>
+                    <div class="certificates-section">
+                        <h4>Certifikáty 🏆</h4>
+                        <a href="#" class="certificate-link">Zobrazit certifikáty</a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Navigace pro Karusel -->
+            <!-- Navigace -->
             <div class="carousel-navigation">
                 <button id="prev-skill" class="nav-arrow" aria-label="Předchozí dovednost">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                        <!-- ZMĚNA ZDE: Intuitivnější ikona šipky -->
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
                     </svg>
                 </button>
                 <button id="next-skill" class="nav-arrow" aria-label="Další dovednost">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                        <!-- ZMĚNA ZDE: Intuitivnější ikona šipky -->
+                        <path d="M4 11h12.17l-5.58 5.59L12 18l8-8-8-8-1.41 1.41L16.17 11H4v2z"></path>
                     </svg>
                 </button>
             </div>
         </div>
 
-        <!-- Pravý sloupec pro vizuální animaci -->
+        <!-- Pravý sloupec pro 3D orbitální karusel -->
         <div class="hero-visuals">
-            <!-- Rotační orbita s ikonami -->
             <div id="skills-orbit" class="skills-orbit">
-                <!-- Vnější zářící kruh -->
-                <div class="orbit-path"></div>
-
-                <!-- Ikony dovedností -->
-                <div class="skill-icon-wrapper active" data-skill="0">
-                    <img src="images/react.png" alt="React icon">
-                </div>
-                <div class="skill-icon-wrapper" data-skill="1">
-                    <img src="images/js.png" alt="JavaScript icon">
-                </div>
-                <div class="skill-icon-wrapper" data-skill="2">
-                    <img src="images/htmlcss.png" alt="HTML & CSS icon">
-                </div>
-                <div class="skill-icon-wrapper" data-skill="3">
-                    <img src="images/pallete.png" alt="UI/UX Design icon">
-                </div>
-
-                <!-- Vaše levitující fotografie ve středu -->
-                <div class="central-image-container">
-                    <img src="images/michael-micin-bezpozadi.png" alt="Michael Mičín - Frontend Developer"
-                        class="levitating-image">
-                    <div class="pulse-ring"></div>
-                </div>
+                <!-- Ikony budou vloženy dynamicky JavaScriptem -->
             </div>
         </div>
     </main>
 
-    <!-- Sem patří odkaz na JavaScriptový soubor -->
     <script>
+        // THIS IS THE CORRECTED SCRIPT
         document.addEventListener('DOMContentLoaded', () => {
+            // --- KONFIGURACE DOVEDNOSTÍ ---
+            const skills = [
+                {
+                    name: "⚛️ React",
+                    description: "Moderní knihovna pro tvorbu dynamických a rychlých uživatelských rozhraní. Ideální pro single-page aplikace a komplexní komponenty.",
+                    icon: "images/react.png",
+                    color: { start: "#0a192f", end: "#003d7e", glow: "#61DAFB" }
+                },
+                {
+                    name: "📜 JavaScript",
+                    description: "Jazyk, který oživuje webové stránky. Od jednoduchých animací po složitou aplikační logiku na straně klienta i serveru (Node.js).",
+                    icon: "images/js.png",
+                    color: { start: "#2d2a0e", end: "#8d820b", glow: "#F7DF1E" }
+                },
+                {
+                    name: "🎨 HTML & CSS",
+                    description: "Základní stavební kameny každého webu. Sémantický HTML5 a moderní CSS3 s použitím Flexbox, Grid a vlastních animací.",
+                    icon: "images/htmlcss.png",
+                    color: { start: "#3e1a0b", end: "#a43d11", glow: "#E34F26" }
+                },
+                {
+                    name: "🖌️ UI/UX Design",
+                    description: "Design zaměřený na člověka. Věřím, že dobrý produkt je nejen funkční, ale i intuitivní a esteticky příjemný. Používám nástroje jako Figma.",
+                    icon: "images/pallete.png",
+                    color: { start: "#241031", end: "#651c8a", glow: "#A259FF" }
+                }
+            ];
 
+            // --- ELEMENTY ---
             const prevButton = document.getElementById('prev-skill');
             const nextButton = document.getElementById('next-skill');
+            const skillTitleHighlight = document.getElementById('skill-title-highlight');
+            const skillNameEl = document.getElementById('skill-name');
+            const skillDescriptionEl = document.getElementById('skill-description');
             const orbit = document.getElementById('skills-orbit');
-
-            // Najdeme všechny prvky, které budeme ovládat
-            const skillIcons = document.querySelectorAll('.skill-icon-wrapper');
-            const skillDescriptions = document.querySelectorAll('.skill-description');
-
-            const totalSkills = skillIcons.length;
+            const body = document.body;
             let currentSkillIndex = 0;
 
-            /**
-             * Hlavní funkce pro aktualizaci karuselu.
-             * @param {number} newIndex - Index nové dovednosti, která má být aktivní.
-             */
-            function updateCarousel(newIndex) {
-                // Vypočítáme nový úhel otočení. Každý krok je -90 stupňů (pro 4 ikony).
-                const rotationAngle = -90 * newIndex;
+            // --- INICIALIZACE ORBITU ---
+            const totalSkills = skills.length;
+            skills.forEach((skill, index) => {
+                const skillNode = document.createElement('div');
+                skillNode.className = 'skill-node';
+                skillNode.dataset.skill = index;
 
-                // Nastavíme CSS proměnnou '--rotation-angle', což spustí animaci v CSS.
-                orbit.style.setProperty('--rotation-angle', `${rotationAngle}deg`);
+                // ** THE FIX IS HERE: Use a CSS variable for the rotation **
+                skillNode.style.setProperty('--node-rotation-angle', `${(360 / totalSkills) * index}deg`);
 
-                // Odebereme 'active' třídu ze starých prvků
-                skillIcons.forEach(icon => icon.classList.remove('active'));
-                skillDescriptions.forEach(desc => desc.classList.remove('active'));
+                const skillIcon = document.createElement('img');
+                skillIcon.src = skill.icon;
+                skillIcon.alt = `${skill.name.split(" ")[1]} icon`;
+                skillNode.appendChild(skillIcon);
 
-                // Přidáme 'active' třídu na nové, aktivní prvky
-                document.querySelector(`.skill-icon-wrapper[data-skill='${newIndex}']`).classList.add('active');
-                document.querySelector(`.skill-description[data-skill='${newIndex}']`).classList.add('active');
+                orbit.appendChild(skillNode);
+
+                skillNode.addEventListener('click', () => {
+                    if (index !== currentSkillIndex) {
+                        updateCarousel(index);
+                    }
+                });
+            });
+
+            const skillNodes = document.querySelectorAll('.skill-node');
+
+            // --- FUNKCE PRO AKTUALIZACI KARUSELU ---
+            function updateCarousel(newIndex, isInitial = false) {
+                const oldIndex = currentSkillIndex;
+                currentSkillIndex = newIndex;
+
+                const skillData = skills[currentSkillIndex];
+
+                // 1. Aktualizace CSS proměnných pro barvy
+                body.style.setProperty('--glow-color', skillData.color.glow);
+                body.style.setProperty('--bg-color-start', skillData.color.start);
+
+                // 2. Aktualizace textu s animací
+                const skillCard = document.querySelector('.skill-card');
+                skillCard.classList.remove('active');
+
+                setTimeout(() => {
+                    skillNameEl.innerHTML = skillData.name;
+                    skillDescriptionEl.innerText = skillData.description;
+                    skillTitleHighlight.innerText = skillData.name.split(" ")[1] || skillData.name;
+                    skillCard.classList.add('active');
+                }, isInitial ? 0 : 250);
+
+                // 3. Aktualizace aktivní ikony v orbitu
+                if (!isInitial) skillNodes[oldIndex].classList.remove('active');
+                skillNodes[currentSkillIndex].classList.add('active');
+
+                // 4. Rotace orbitu
+                const rotationAngle = -(360 / totalSkills) * currentSkillIndex;
+                orbit.style.transform = `rotateY(${rotationAngle}deg) rotateX(10deg)`;
             }
 
-
-            // Funkce pro další dovednost
+            // --- EVENT LISTENERY ---
             nextButton.addEventListener('click', () => {
-                // Zvýšíme index, a pokud jsme na konci, skočíme zpět na začátek (0)
-                currentSkillIndex = (currentSkillIndex + 1) % totalSkills;
-                updateCarousel(currentSkillIndex);
+                const nextIndex = (currentSkillIndex + 1) % totalSkills;
+                updateCarousel(nextIndex);
             });
 
-            // Funkce pro předchozí dovednost
             prevButton.addEventListener('click', () => {
-                // Snížíme index, a pokud jsme na začátku, skočíme na konec (poslední prvek)
-                currentSkillIndex = (currentSkillIndex - 1 + totalSkills) % totalSkills;
-                updateCarousel(currentSkillIndex);
+                const prevIndex = (currentSkillIndex - 1 + totalSkills) % totalSkills;
+                updateCarousel(prevIndex);
             });
 
+            // --- INICIALIZACE ---
+            updateCarousel(0, true);
 
-            // Inicializace - zobrazíme první dovednost hned po načtení stránky
-            updateCarousel(0);
+            // --- CANVAS PARTICLE ANIMATION ---
+            const canvas = document.getElementById('particle-canvas');
+            if (canvas) { // Check if canvas exists
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                let particlesArray;
+
+                class Particle {
+                    constructor(x, y, dirX, dirY, size, color) {
+                        this.x = x; this.y = y; this.directionX = dirX; this.directionY = dirY;
+                        this.size = size; this.color = color;
+                    }
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                        ctx.fillStyle = this.color;
+                        ctx.fill();
+                    }
+                    update() {
+                        if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                        if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                        this.x += this.directionX; this.y += this.directionY;
+                        this.draw();
+                    }
+                }
+
+                function initParticles() {
+                    particlesArray = [];
+                    const numberOfParticles = (canvas.height * canvas.width) / 9000;
+                    const glowRgb = getComputedStyle(body).getPropertyValue('--glow-color').trim();
+                    for (let i = 0; i < numberOfParticles; i++) {
+                        const size = (Math.random() * 2) + 1;
+                        const x = Math.random() * (innerWidth - size * 2) + size * 2;
+                        const y = Math.random() * (innerHeight - size * 2) + size * 2;
+                        const dirX = (Math.random() * 0.4) - 0.2;
+                        const dirY = (Math.random() * 0.4) - 0.2;
+                        particlesArray.push(new Particle(x, y, dirX, dirY, size, `rgba(${hexToRgb(glowRgb)}, 0.6)`));
+                    }
+                }
+
+                function animateParticles() {
+                    requestAnimationFrame(animateParticles);
+                    ctx.clearRect(0, 0, innerWidth, innerHeight);
+                    particlesArray.forEach(p => p.update());
+                }
+
+
+
+                function hexToRgb(hex) {
+                    let r = 0, g = 0, b = 0;
+                    if (hex.length == 4) { r = parseInt(hex[1] + hex[1], 16); g = parseInt(hex[2] + hex[2], 16); b = parseInt(hex[3] + hex[3], 16); }
+                    else if (hex.length == 7) { r = parseInt(hex.substring(1, 3), 16); g = parseInt(hex.substring(3, 5), 16); b = parseInt(hex.substring(5, 7), 16); }
+                    return `${r},${g},${b}`;
+                }
+
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        canvas.width = innerWidth;
+                        canvas.height = innerHeight;
+                        initParticles();
+                    }, 250);
+                });
+
+                new MutationObserver(initParticles).observe(body, { attributes: true, attributeFilter: ['style'] });
+
+                initParticles();
+                animateParticles();
+            }
         });
-    </script>
-</body>
 
+        function closeNotification() {
+            document.getElementById('notifiaction-mAt').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
