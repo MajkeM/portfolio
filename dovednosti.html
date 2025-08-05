@@ -20,6 +20,38 @@
 </head>
 
 <body>
+    <!-- === MODÁLNÍ OKNO PRO CERTIFIKÁTY === -->
+    <div id="certificates-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Zavřít okno">&times;</button>
+            <h2>Moje Certifikáty</h2>
+            <div class="certificates-gallery">
+                <!-- Sem přijdou obrázky certifikátů -->
+                <a href="images/javascript-certificate-begginer.pdf" target="_blank">
+                    <img src="images/js1.png" alt="Javascript certifikát zkouška ">
+                </a>
+                <a href="images/javascript-certificate-api.pdf" target="_blank">
+                    <img src="images/js2.png" alt="JavaScript Certifikát API">
+                </a>
+                <a href="images/javascript-certificate-complete-course.pdf" target="_blank">
+                    <img src="images/js3.png" alt="JavaScript Certifikát COMPLETE COURSE">
+                </a>
+                <a href="https://www.itnetwork.cz/certifikat/eyJjb3Vyc2VJZCI6MTYxNywibWVtYmVySWQiOjEzMDIzNn0="
+                    target="_blank">
+                    <img src="images/UX-design-certificate.png" alt="UI/UX Design Certifikát">
+                </a>
+                <a href="https://www.sololearn.com/certificates/CC-TS8KYQHW" target="_blank">
+                    <img src="images/techForEveryone-certificate.png" alt="certifikát Tech For Everyone">
+                </a>
+                <a>Na dalších pracuji🧑‍💻</a>
+                <!-- Přidejte další podle potřeby -->
+            </div>
+            <p class="modal-footer">Kliknutím na obrázek jej zobrazíte v plné velikosti.</p>
+        </div>
+    </div>
+
+
+
     <!-- Canvas pro dynamické pozadí -->
     <canvas id="particle-canvas"></canvas>
 
@@ -196,6 +228,33 @@
                 const prevIndex = (currentSkillIndex - 1 + totalSkills) % totalSkills;
                 updateCarousel(prevIndex);
             });
+            // ... Váš stávající kód ...
+            // ... Event listenery pro šipky atd. ...
+
+            // --- OBSLUHA MODÁLNÍHO OKNA PRO CERTIFIKÁTY ---
+            const openModalBtn = document.querySelector('.certificate-link');
+            const closeModalBtn = document.querySelector('.modal-close');
+            const modalOverlay = document.getElementById('certificates-modal');
+
+            openModalBtn.addEventListener('click', (event) => {
+                event.preventDefault(); // Zabrání výchozí akci odkazu (posun na #)
+                modalOverlay.classList.add('active');
+            });
+
+            const closeModal = () => {
+                modalOverlay.classList.remove('active');
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (event) => {
+                // Zavře okno pouze pokud se klikne na pozadí (overlay), ne na obsah
+                if (event.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+
+
+            // ... Zbytek vašeho kódu pro canvas a další ...
 
             // --- INICIALIZACE ---
             updateCarousel(0, true);
