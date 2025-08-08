@@ -557,8 +557,10 @@ grid-template-columns: repeat(4, 1fr); /* 4 stejné sloupce */
 }
 
 .small {
-    top: 36vh;
-    height: 35vh;
+    top: 52%;
+    height: auto;
+    max-height: 48%;
+    min-height: 48%;
 }
 
 .info-header {
@@ -833,6 +835,8 @@ grid-template-columns: repeat(4, 1fr); /* 4 stejné sloupce */
 .small {
     top: 0;
     height: auto;
+    max-height: 50vh;
+    min-height: 10vh;
 }
 
 .info article p {
