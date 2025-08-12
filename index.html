@@ -51,6 +51,12 @@
             <nav>
                 <img id="logo" class="logo-img" src="./images/logo-withoutBG.png"
                     alt="Logo Michaela Mičína, frontend developera">
+                <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
                 <div class="nav-links">
 
                     <a id="a1" class="current-page" id="home-link" href="#">Domů</a>
@@ -187,7 +193,7 @@
                                     <h3>klientů</h3>
                                 </strong>
                             </div>
-                            <p>NAJEĎ MYŠÍ</p>
+                            <p id="text-najed-mysi">NAJEĎ MYŠÍ</p>
                         </div>
                     </div>
                     <div class="front">
@@ -652,6 +658,24 @@
     </main>
     <script>
 
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navLinkss = document.querySelector('.nav-links');
+
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
+            navLinkss.classList.toggle('active');
+        });
+
+        // Zavření při kliknutí na odkaz
+        document.querySelectorAll('.nav-links a, .nav-links button').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                navLinkss.classList.remove('active');
+            });
+        });
+
+
+
         // current time function
         function zobrazCas() {
             const ted = new Date(); // získá aktuální čas
@@ -758,6 +782,16 @@
             // Tím pádem žádný odkaz nebude aktivní
 
             moveNavIndicator();
+        });
+
+
+        // change html of najed mysi when on mobile 
+        window.addEventListener("resize", function () {
+            if (window.innerWidth <= 768) {
+                document.getElementById("text-najed-mysi").innerHTML = "KLIKNĚTE NA MĚ";
+            } else {
+                document.getElementById("text-najed-mysi").innerHTML = "NAJEĎ MYŠÍ";
+            }
         });
 
 
