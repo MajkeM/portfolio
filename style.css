@@ -125,7 +125,6 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: black;
 
-    position: relative;
     overflow-x: hidden;
 }
 
@@ -710,7 +709,8 @@ nav {
     color: white;
     margin-top: 23vh ;
     margin-left: 10%;
-    height: 80vh;
+    height: auto;
+    min-height: 80vh;
     z-index: 1;
 
 }
