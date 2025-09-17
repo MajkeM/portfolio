@@ -653,6 +653,7 @@
                             <span class="btn-text">Odeslat zprávu</span>
                             <span class="btn-spinner" style="display: none;">Odesílání...</span>
                         </button>
+                        <div class="g-recaptcha" data-sitekey="6LcsOMwrAAAAADqsz676wMcW0ZL1cUsOxskd6rm-"></div>
                     </form>
                 </div>
             </div>
@@ -660,6 +661,8 @@
                 <p>© 2025 Michael Mičín. Všechna práva vyhrazena.</p>
             </div>
         </footer>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </main>
     <script>
 
@@ -864,114 +867,100 @@
             box2.style.transform = 'translateX(0)';
         }
 
+        // TOTO JE NOVÝ KÓD S EMAILJS - VLOŽTE HO NA MÍSTO TOHO STARÉHO
         document.addEventListener('DOMContentLoaded', function () {
-
             const form = document.getElementById('contactForm');
+            if (!form) return; // Pokud formulář na stránce není, ukončíme skript
+
             const submitBtn = document.getElementById('submitBtn');
             const btnText = submitBtn.querySelector('.btn-text');
             const btnSpinner = submitBtn.querySelector('.btn-spinner');
 
-            // Form validation
-            form.addEventListener('submit', async function (e) {
-                e.preventDefault();
+            // !!! DOPLŇTE SVŮJ VEŘEJNÝ KLÍČ (PUBLIC KEY) !!!
+            emailjs.init({
+                publicKey: "AeCNEjCDUi7-UaV7D",
+            });
 
-                // Disable submit button
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Zabrání výchozímu odeslání
+
+                // === ZDE ZAČÍNÁ VYLEPŠENÁ VALIDACE POMOCÍ REGEX ===
+
+                // Definice regulárních výrazů
+                const nameRegex = /^[a-zA-Z\s\u00C0-\u017F]+$/; // Povolí písmena (včetně diakritiky) a mezery
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Jednoduchý, ale efektivní regex pro email
+                const illegalCharsRegex = /[<>]/; // Hledá znaky < nebo >
+
+                // Získání elementů a jejich hodnot
+                const nameInput = document.getElementById('name');
+                const emailInput = document.getElementById('email');
+                const messageInput = document.getElementById('message');
+
+                let isValid = true;
+
+                // Reset chybových hlášek
+                document.getElementById('nameError').textContent = '';
+                document.getElementById('messageError').textContent = '';
+                document.getElementById('emailError').textContent = '';
+
+                // Validace jména
+                if (!nameRegex.test(nameInput.value.trim())) {
+                    document.getElementById('nameError').textContent = 'Jméno může obsahovat pouze písmena a mezery.';
+                    isValid = false;
+                }
+
+                // Validace e-mailu
+                if (!emailRegex.test(emailInput.value.trim())) {
+                    document.getElementById('emailError').textContent = 'Prosím, zadejte platný formát e-mailu.';
+                    isValid = false;
+                }
+
+                // Validace zprávy (délka a nepovolené znaky)
+                if (messageInput.value.trim().length < 10) {
+                    document.getElementById('messageError').textContent = 'Zpráva musí mít alespoň 10 znaků.';
+                    isValid = false;
+                } else if (illegalCharsRegex.test(messageInput.value)) {
+                    document.getElementById('messageError').textContent = 'Zpráva obsahuje nepovolené znaky (<, >).';
+                    isValid = false;
+                }
+
+                // Pokud formulář není validní, ukončíme odesílání
+                if (!isValid) {
+                    return;
+                }
+
+                // === KONEC VALIDACE ===
+
+
                 submitBtn.disabled = true;
                 btnText.style.display = 'none';
                 btnSpinner.style.display = 'inline';
 
-                // Clear previous errors
-                document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
-
-                // Validate form
-                const name = document.getElementById('name').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const message = document.getElementById('message').value.trim();
-                const website = document.getElementById('website').value.trim();
-
-                let isValid = true;
-
-                // Honeypot check
-                if (website) {
-                    // This is likely a bot, silently fail
-                    return;
-                }
-
-                // Name validation
-                if (!name || name.length < 2) {
-                    document.getElementById('nameError').textContent = 'Prosím, zadejte platné jméno';
-                    isValid = false;
-                }
-
-                // Email validation
-                const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
-                if (!email || !emailRegex.test(email)) {
-                    document.getElementById('emailError').textContent = 'Prosím, zadejte platnou e-mailovou adresu';
-                    isValid = false;
-                }
-
-                // Message validation
-                if (!message || message.length < 10) {
-                    document.getElementById('messageError').textContent = 'Zpráva musí mít alespoň 10 znaků';
-                    isValid = false;
-                }
-
-                if (!isValid) {
-                    submitBtn.disabled = false;
-                    btnText.style.display = 'inline';
-                    btnSpinner.style.display = 'none';
-                    return;
-                }
-
-                try {
-                    // Create form data
-                    const formData = new FormData(form);
-
-                    // Add timestamp to prevent duplicate submissions
-                    formData.append('timestamp', new Date().getTime());
-
-                    // Send form data
-                    const response = await fetch('/submit-contact', {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(Object.fromEntries(formData))
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Odezva sítě nebyla v pořádku');
-                    }
-
-                    const data = await response.json();
-
-                    if (data.success) {
-                        // Show success message
+                // !!! DOPLŇTE SVÉ SERVICE ID A TEMPLATE ID !!!
+                emailjs.sendForm('service_z65rmd3', 'template_7dicc4u', this)
+                    .then(function (response) {
+                        console.log('SUCCESS!', response.status, response.text);
                         alert('Zpráva byla úspěšně odeslána!');
                         form.reset();
-                    } else {
-                        throw new Error(data.message || 'Nepodařilo se odeslat zprávu');
-                    }
-                } catch (error) {
-                    console.error('Chyba:', error);
-                    alert('Nepodařilo se odeslat zprávu. Zkuste to prosím později.');
-                } finally {
-                    // Re-enable submit button
-                    submitBtn.disabled = false;
-                    btnText.style.display = 'inline';
-                    btnSpinner.style.display = 'none';
-                }
-            });
-
-            // Real-time validation
-            form.querySelectorAll('input, textarea').forEach(input => {
-                input.addEventListener('input', function () {
-                    const errorElement = document.getElementById(this.id + 'Error');
-                    if (errorElement) {
-                        errorElement.textContent = '';
-                    }
-                });
+                        if (typeof grecaptcha !== 'undefined') {
+                            grecaptcha.reset(); // Resetuje i reCAPTCHA
+                        }
+                    }, function (error) {
+                        console.log('FAILED...', error);
+                        if (error.text && error.text.includes("reCAPTCHA")) {
+                            alert('Prosím, potvrďte, že nejste robot.');
+                        } else {
+                            alert('Odeslání zprávy se nezdařilo. Zkuste to prosím později.');
+                        }
+                        if (typeof grecaptcha !== 'undefined') {
+                            grecaptcha.reset();
+                        }
+                    })
+                    .finally(function () {
+                        submitBtn.disabled = false;
+                        btnText.style.display = 'inline';
+                        btnSpinner.style.display = 'none';
+                    });
             });
         });
     </script>
