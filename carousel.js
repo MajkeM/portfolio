@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const backgroundImages = [
         "images/portfolioToPortfolio.png",
         "images/bouci.png",
+        "images/DHgravirovani-logo.png",
         "images/stupidGamesBG.jpeg",
         "images/moreCS.jpg"
     ];
