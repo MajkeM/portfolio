@@ -1,6 +1,24 @@
+/* =============================================================================
+   PORTFOLIO CSS - CLEAN & ORGANIZED
+   Author: Michael Mičín | Last Updated: 6. října 2025
+   =============================================================================
+   
+   📑 QUICK NAVIGATION:
+   - Lines ~1-150:     Reset, Fonts, Global Styles
+   - Lines ~151-400:   Navigation & Header  
+   - Lines ~401-700:   Hero & Skills (.box-1, .box-2)
+   - Lines ~701-1200:  Cards, Buttons, Forms
+   - Lines ~1201-1700: About & Projects (.box-3, .box-4)
+   - Lines ~1701-2000: Backgrounds & Effects
+   - Lines ~2001-2500: Animations (Keyframes)
+   - Lines ~2501-END:  Media Queries (Responsive)
+   
+   ============================================================================= */
+
+/* === FONTS === */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Dancing+Script:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Dancing+Script:wght@400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 * {
     margin: 0;
@@ -119,14 +137,18 @@
 
 html {
     scroll-behavior: smooth;
+    overflow: hidden;
+    height: 100%;
 }
 
 body {
     font-family: 'Inter', sans-serif;
     background-color: black;
-
-    position: relative;
-    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: auto;
+    width: 100%;
 }
 
 
@@ -875,7 +897,6 @@ nav {
     height: 100%;
     pointer-events: none;
     z-index: 0;
-    overflow: hidden;
 }
 
 .background-element {
@@ -934,6 +955,7 @@ nav {
 main {
     position: relative;
     z-index: 1;
+    overflow: visible;
 }
 #about {
     /* background: #0a0a0a; */ /* Original BG (now has animation layer too) */
@@ -941,9 +963,9 @@ main {
     /* position: relative; */ /* ALREADY relative */
     position: relative;
     width: 100%;
-    height: 0;  
+    height: auto;  
     padding: 4rem 0; /* Keep Existing Padding */
-    overflow: hidden;  /* *** ADDED: Contain background animation *** */
+    overflow: visible;  /* Allow content to flow */
     z-index: 2; /* Added for stacking context */
     margin-top: 10vh;
 }
@@ -1004,6 +1026,7 @@ main {
 
     background: linear-gradient(to bottom, white 40%, black 100%); /* shora dolů */
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 
 }
@@ -2408,6 +2431,7 @@ body, html { overflow-x: hidden; }
             margin-bottom: 3rem;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
     .section h2 {
