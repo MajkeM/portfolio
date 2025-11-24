@@ -26,11 +26,7 @@
 
 
     <img id="languege" class="languege" src="images/en__flag.png" alt="anglický jazyk">
-    <div id="notifiaction-mAt" class="notification-mobile-tablet">
-        <p class="emoji-notification">✨ 🖥️ ✨</p>
-        <p>Pro nejlepší <span class="whitebold">zážitek</span>, prosím použijte desktopový prohlížeč.</p>
-        <button onclick="closeNotification()" class="close-notification">Zavřít</button>
-    </div>
+
 
     <div class="starry-bg">
         <div class="star" style="top:5%;left:10%;animation-delay:0.2s;"></div>
@@ -74,29 +70,11 @@
         <div class="container">
             <div class="boxes">
                 <article class="box box-1">
-
-
-                    <h1>Ahoj, jmenuji se <span class="write-font">Michael</span> <span id="wave">👋🏻</span></h1>
-                    <p> Jsem <span class="semibold">frontend developer</span> a <span class="semibold">UI/UX
-                            designér</span> s vášní pro tvorbu
-                        plynulých, čistých a responzivních uživatelských rozhraní. Specializuji se na <span
-                            class="semibold">React,
-                            JavaScript a
-                            HTML/CSS</span> — a rád kombinuji ostrý vizuál s čistým a efektivním kódem.<br><br>
-
-                        Nejlepší webové stránky jdou dál než jen kód – přinášejí <span
-                            class="semibold">zážitek</span>.<br><br>
-
-                        Přináším <span class="semibold">design zaměřený na člověka</span> a <span
-                            class="semibold">bezchybný
-                            uživatelský zážitek</span> na vaše
-                        webové stránky → podívejte se na mou práci → ozvěte se → a pojďme přinést trochu radosti vašim
-                        uživatelům.</p>
-
-                    <div class="box-1-button">
-                        <button onclick="scrollToContact()">Ozvěte se</button>
+                    <div class="hero-text-content">
+                        <h1>Ahoj, jmenuji se <br><span class="gradient-text">Michael</span> <span id="wave">👋🏻</span>
+                        </h1>
+                        <p class="hero-subtext">Tvořím moderní weby s důrazem na detail a zážitek.</p>
                     </div>
-
                 </article>
                 <article class="box box-2">
                     <img src="./images/iphone.png" id="iphone" alt="iPhone">
@@ -480,6 +458,7 @@
             </div>
             <img src="images/rippedPaper.png" class="ripped-paper-sliderB" alt="Roztržený papír okraj">
         </article>
+
         <article class="container2">
 
             <h2 class="section-title">Moje služby</h2>
@@ -627,7 +606,7 @@
                 <div class="box-5-contact-info scroll-animate">
                     <div class="box-5-contact-item">
                         <div class="box-5-contact-icon">📧</div>
-                        <h3>E-mail</h3>
+                        <h3>E-mail</h3>  
                         <p>micin.michael0@gmail.com</p>
                     </div>
                     <div class="box-5-contact-item scroll-animate">
@@ -684,309 +663,13 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </main>
-    <script>
 
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const navLinkss = document.querySelector('.nav-links');
 
-        hamburgerBtn.addEventListener('click', () => {
-            hamburgerBtn.classList.toggle('active');
-            navLinkss.classList.toggle('active');
-        });
 
-        // Zavření při kliknutí na odkaz
-        document.querySelectorAll('.nav-links a, .nav-links button').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburgerBtn.classList.remove('active');
-                navLinkss.classList.remove('active');
-            });
-        });
-
-
-
-        // current time function
-        function zobrazCas() {
-            const ted = new Date(); // získá aktuální čas
-            const hodiny = ted.getHours().toString().padStart(2, '0');
-            const minuty = ted.getMinutes().toString().padStart(2, '0');
-
-            const aktualniCas = `${hodiny}:${minuty}`;
-
-            document.getElementById("time").style.opacity = 1; // zobrazí iPhone
-            document.getElementById("time").textContent = `${aktualniCas}`;
-        }
-
-        // zobrazí čas hned po načtení stránky
-
-        // aktualizuje čas každou sekundu
-        setInterval(zobrazCas, 2000);
-
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        document.querySelectorAll('.scroll-animate').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
-
-
-    <script>
-        const languege = document.getElementById("languege");
-        languege.addEventListener("click", function (e) {
-            if (languege.src.includes("en__flag.png")) {
-                languege.src = "images/czech__flag.jpeg";
-                window.location.href = "index-en.html"; // Redirect to Czech version
-            } else {
-                languege.src = "images/czech__flag.jpeg";
-
-            }
-
-        });
-        function scrollToContact() {
-            const contactSection = document.getElementById('contact');
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        let logo = document.getElementById("logo");
-        let notification = document.getElementById("notifiaction-mAt");
-
-        if (window.innerWidth <= 768) {
-            notification.style.display = "block";
-        } else {
-            notification.style.display = "none";
-        }
-
-        function closeNotification() {
-            notification.style.display = "none";
-        }
-
-
-
-        // Add scroll opacity effect to header
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-            const maxScroll = 100; // Adjust this value to control when opacity reaches minimum
-
-            // Calculate opacity based on scroll position
-            // Starts at 1 (fully visible) and decreases to 0.3 as you scroll
-            const opacity = Math.max(0, 1 - (scrollPosition / maxScroll));
-
-            logo.style.opacity = opacity;
-        });
-
-        let a1 = document.getElementById("a1");
-        let a2 = document.getElementById("a2");
-        let a3 = document.getElementById("a3");
-
-
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-
-            // Always remove all first
-            [a1, a2, a3].forEach(link => link.classList.remove("current-page"));
-
-            if (scrollPosition < 1000) {
-                a1.classList.add("current-page");
-            }
-
-            if (scrollPosition >= 1000 && scrollPosition < 2900) {
-                a2.classList.add("current-page");
-            }
-
-            if (scrollPosition >= 2900 && scrollPosition < 3300) {
-                a3.classList.add("current-page");
-            }
-
-            // Pokud jsme víc než 3300, žádná class se už nepřidá
-            // Tím pádem žádný odkaz nebude aktivní
-
-            moveNavIndicator();
-        });
-
-
-        // change html of najed mysi when on mobile 
-        window.addEventListener("resize", function () {
-            if (window.innerWidth <= 768) {
-                document.getElementById("text-najed-mysi").innerHTML = "KLIKNĚTE NA MĚ";
-            } else {
-                document.getElementById("text-najed-mysi").innerHTML = "NAJEĎ MYŠÍ";
-            }
-        });
-
-
-
-        // --- Navbar Sliding Indicator Logic ---
-        const navLinks = document.querySelectorAll('.nav-links a');
-        const navIndicator = document.querySelector('.nav-indicator');
-        function moveNavIndicator() {
-            const active = document.querySelector('.nav-links .current-page');
-            if (!active || !navIndicator) return;
-            navIndicator.style.left = active.offsetLeft + 'px';
-            navIndicator.style.width = active.offsetWidth + 'px';
-            navIndicator.style.height = active.offsetHeight + 'px';
-            navIndicator.style.top = active.offsetTop + 'px';
-        }
-        // Initial position
-        moveNavIndicator();
-        // Update on resize
-        window.addEventListener('resize', moveNavIndicator);
-        // If you change current-page class via JS elsewhere, call moveNavIndicator() after.
-
-        const box2 = document.querySelector('.box-2');
-        let mouseX = 0;
-        let mouseY = 0;
-        let windowWidth = window.innerWidth;
-        let windowHeight = window.innerHeight;
-        let isMobile = window.innerWidth <= 768;
-
-        // Update mouse position
-        document.addEventListener('mousemove', (e) => {
-            if (isMobile) return;
-
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-            // Calculate rotation and movement with increased sensitivity
-            const rotateX = (mouseY - windowHeight / 2) / 20;
-            const rotateY = (mouseX - windowWidth / 2) / 20;
-            const moveX = (mouseX - windowWidth / 2) / 50;
-            const moveY = (mouseY - windowHeight / 2) / 50;
-
-            // Apply transform
-            box2.style.transform = `
-                translateX(calc(20% + ${moveX}px))
-                translateY(${moveY}px)
-                rotateX(${-rotateX}deg)
-                rotateY(${rotateY}deg)
-            `;
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            windowWidth = window.innerWidth;
-            windowHeight = window.innerHeight;
-            isMobile = window.innerWidth <= 768;
-
-            // Reset transform on mobile
-            if (isMobile) {
-                box2.style.transform = 'translateX(0)';
-            }
-        });
-
-        // Initialize based on screen size
-        if (isMobile) {
-            box2.style.transform = 'translateX(0)';
-        }
-
-        // TOTO JE NOVÝ KÓD S EMAILJS - VLOŽTE HO NA MÍSTO TOHO STARÉHO
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('contactForm');
-            if (!form) return; // Pokud formulář na stránce není, ukončíme skript
-
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnSpinner = submitBtn.querySelector('.btn-spinner');
-
-            // !!! DOPLŇTE SVŮJ VEŘEJNÝ KLÍČ (PUBLIC KEY) !!!
-            emailjs.init({
-                publicKey: "AeCNEjCDUi7-UaV7D",
-            });
-
-            form.addEventListener('submit', function (e) {
-                e.preventDefault(); // Zabrání výchozímu odeslání
-
-                // === ZDE ZAČÍNÁ VYLEPŠENÁ VALIDACE POMOCÍ REGEX ===
-
-                // Definice regulárních výrazů
-                const nameRegex = /^[a-zA-Z\s\u00C0-\u017F]+$/; // Povolí písmena (včetně diakritiky) a mezery
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Jednoduchý, ale efektivní regex pro email
-                const illegalCharsRegex = /[<>]/; // Hledá znaky < nebo >
-
-                // Získání elementů a jejich hodnot
-                const nameInput = document.getElementById('name');
-                const emailInput = document.getElementById('email');
-                const messageInput = document.getElementById('message');
-
-                let isValid = true;
-
-                // Reset chybových hlášek
-                document.getElementById('nameError').textContent = '';
-                document.getElementById('messageError').textContent = '';
-                document.getElementById('emailError').textContent = '';
-
-                // Validace jména
-                if (!nameRegex.test(nameInput.value.trim())) {
-                    document.getElementById('nameError').textContent = 'Jméno může obsahovat pouze písmena a mezery.';
-                    isValid = false;
-                }
-
-                // Validace e-mailu
-                if (!emailRegex.test(emailInput.value.trim())) {
-                    document.getElementById('emailError').textContent = 'Prosím, zadejte platný formát e-mailu.';
-                    isValid = false;
-                }
-
-                // Validace zprávy (délka a nepovolené znaky)
-                if (messageInput.value.trim().length < 10) {
-                    document.getElementById('messageError').textContent = 'Zpráva musí mít alespoň 10 znaků.';
-                    isValid = false;
-                } else if (illegalCharsRegex.test(messageInput.value)) {
-                    document.getElementById('messageError').textContent = 'Zpráva obsahuje nepovolené znaky (<, >).';
-                    isValid = false;
-                }
-
-                // Pokud formulář není validní, ukončíme odesílání
-                if (!isValid) {
-                    return;
-                }
-
-                // === KONEC VALIDACE ===
-
-
-                submitBtn.disabled = true;
-                btnText.style.display = 'none';
-                btnSpinner.style.display = 'inline';
-
-                // !!! DOPLŇTE SVÉ SERVICE ID A TEMPLATE ID !!!
-                emailjs.sendForm('service_z65rmd3', 'template_7dicc4u', this)
-                    .then(function (response) {
-                        console.log('SUCCESS!', response.status, response.text);
-                        alert('Zpráva byla úspěšně odeslána!');
-                        form.reset();
-                        if (typeof grecaptcha !== 'undefined') {
-                            grecaptcha.reset(); // Resetuje i reCAPTCHA
-                        }
-                    }, function (error) {
-                        console.log('FAILED...', error);
-                        if (error.text && error.text.includes("reCAPTCHA")) {
-                            alert('Prosím, potvrďte, že nejste robot.');
-                        } else {
-                            alert('Odeslání zprávy se nezdařilo. Zkuste to prosím později.');
-                        }
-                        if (typeof grecaptcha !== 'undefined') {
-                            grecaptcha.reset();
-                        }
-                    })
-                    .finally(function () {
-                        submitBtn.disabled = false;
-                        btnText.style.display = 'inline';
-                        btnSpinner.style.display = 'none';
-                    });
-            });
-        });
-    </script>
 
 
     <script src="carousel.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
