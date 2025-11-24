@@ -92,6 +92,7 @@ body {
     height: 100%;
     overflow: auto;
     width: 100%;
+    position: relative;
 }
 
 
@@ -365,6 +366,20 @@ nav {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
+    min-height: 100vh;
+    position: relative;
+}
+
+.boxes::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(ellipse at center, #1a0a2e 0%, #0d0221 40%, #000000 100%);
+    z-index: -1;
+    pointer-events: none;
 }
 
 .box {
@@ -380,7 +395,7 @@ nav {
     min-height: 100vh;
     height: auto;
     width: 90%;
-    margin-top: 15%;
+    margin-top: 25%;
     margin-right: -10%;
     overflow: visible;
 
@@ -668,24 +683,27 @@ nav {
 
 .box-1 {
     color: white;
-    margin-top: 23vh;
-    margin-left: 10%;
-    height: 80vh;
+    margin-top: 0;
+    margin-left: 0;
+    height: 100vh;
     z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .hero-text-content h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    line-height: 1.1;
+    font-size: 7rem;
+    font-weight: 500;
+    line-height: 1.2;
     color: #fff;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
     animation: slideUp 0.8s ease forwards;
     opacity: 0;
     animation-delay: 0.4s;
+    text-align: left;
 }
 
 .gradient-text {
@@ -693,18 +711,20 @@ nav {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    font-weight: 700;
 }
 
 .hero-subtext {
-    font-size: 1.2rem;
+    font-size: 2rem;
     color: #a0a0a0;
-    max-width: 500px;
-    line-height: 1.6;
-    margin-top: 1rem;
-    font-weight: 300;
+    max-width: 90%;
+    line-height: 1.5;
+    margin-top: 2rem;
+    font-weight: 200;
     animation: slideUp 0.8s ease forwards;
     opacity: 0;
     animation-delay: 0.6s;
+    text-align: left;
 }
 
 #wave {
@@ -903,44 +923,44 @@ nav {
 }
 
 .element-1 {
-    width: 800px;
-    height: 800px;
+    width: 1000px;
+    height: 1000px;
     top: -20%;
-    left: -10%;
+    left: -15%;
     background: radial-gradient(circle at center,
-            rgba(71, 118, 230, 0.2) 0%,
-            rgba(142, 84, 233, 0.2) 50%,
-            transparent 0%);
-    filter: blur(70px);
-    animation: float1 15s ease-in-out infinite;
+            rgba(138, 43, 226, 0.25) 0%,
+            rgba(75, 0, 130, 0.15) 40%,
+            transparent 70%);
+    filter: blur(80px);
+    animation: float1 20s ease-in-out infinite;
     opacity: 1;
 }
 
 .element-2 {
-    width: 600px;
-    height: 600px;
+    width: 800px;
+    height: 800px;
     top: 30%;
-    right: -10%;
+    right: -15%;
     background: radial-gradient(circle at center,
-            rgba(142, 84, 233, 0.2) 0%,
-            rgba(71, 118, 230, 0.2) 50%,
+            rgba(29, 78, 216, 0.3) 0%,
+            rgba(147, 51, 234, 0.2) 50%,
             transparent 70%);
-    filter: blur(60px);
-    animation: float2 5s ease-in-out infinite;
+    filter: blur(90px);
+    animation: float2 18s ease-in-out infinite;
     opacity: 1;
 }
 
 .element-3 {
-    width: 500px;
-    height: 500px;
+    width: 700px;
+    height: 700px;
     bottom: -10%;
-    left: 40%;
+    left: 35%;
     background: radial-gradient(circle at center,
-            rgba(71, 118, 230, 0.15) 0%,
-            rgba(142, 84, 233, 0.15) 50%,
+            rgba(219, 39, 119, 0.2) 0%,
+            rgba(167, 139, 250, 0.15) 50%,
             transparent 70%);
-    filter: blur(50px);
-    animation: float3 5s ease-in-out infinite;
+    filter: blur(100px);
+    animation: float3 22s ease-in-out infinite;
     opacity: 1;
 }
 

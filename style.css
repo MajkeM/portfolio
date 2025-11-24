@@ -647,20 +647,46 @@ nav {
 .box-1 {
     color: white;
     margin-left: 10%;
-    height: 40vh;
+    height: 100vh;
     z-index: 1;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.hero-text-content {
+    width: 100%;
+    max-width: 900px;
+    padding: 2rem;
+}
 
 .box-1 h1 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 16rem;
     font-weight: bold;
     animation: slideUp 0.8s ease forwards;
     opacity: 0;
     animation-delay: 0.4s;
     z-index: 1;
+    line-height: 1.1;
+    margin-bottom: 2.5rem;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtext {
+    text-align: center;
+    font-size: 5rem;
+    color: #B6B6B6;
+    animation: slideUp 0.8s ease forwards;
+    opacity: 0;
+    animation-delay: 0.6s;
+    font-weight: 300;
 }
 
 
@@ -4221,28 +4247,67 @@ html {
     .boxes {
         display: flex;
         flex-direction: column;
-        height: auto;
-        min-height: 0;
-        max-height: none;
     }
 
-    .box-2-skills-arrow {
-        color: white;
-        position: relative;
-        bottom: 5vh;
-        left: 42vw;
-        width: 20%;
+    /* Responsive hero text for tablets */
+    .box-1 h1 {
+        font-size: 4rem;
     }
 
-    .strip1 {
-        display: none;
+    .hero-subtext {
+        font-size: 1.5rem;
+    }
+}
+
+/* Mobile responsive styles for hero text */
+@media (max-width: 768px) {
+    .box-1 {
+        margin-left: 5%;
+        padding: 1rem;
     }
 
-    .strip2 {
-        display: none;
+    .box-1 h1 {
+        font-size: 3rem;
+        line-height: 1.1;
     }
 
-    .strip3 {
-        display: none;
+    .hero-subtext {
+        font-size: 1.2rem;
     }
+
+    .hero-text-content {
+        max-width: 100%;
+        padding: 1rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .box-1 h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtext {
+        font-size: 1rem;
+    }
+}
+
+.box-2-skills-arrow {
+    color: white;
+    position: relative;
+    bottom: 5vh;
+    left: 42vw;
+    width: 20%;
+}
+
+.strip1 {
+    display: none;
+}
+
+.strip2 {
+    display: none;
+}
+
+.strip3 {
+    display: none;
 }
