@@ -10,7 +10,7 @@
     height: 100%;
     transform-style: preserve-3d;
     transition: transform 300ms;
-    box-shadow: 0px 0px 10px 1px #000000ee;
+
     border-radius: 5px;
   }
   
@@ -42,7 +42,7 @@
     position: absolute;
     width: 99%;
     height: 99%;
-    background-color: black;
+
 
     color: white;
     display: flex;
@@ -255,50 +255,165 @@
 
 
 
-@media (max-width: 500px) {
-  .side-card {
-    font-size: 0.5rem;
-  }
-  .back-h2 h3{
-    padding: 0;
-    font-size: 6vw;
-  }
-  .card {
-    border-right: 1px solid white;
-    border-left: 1px solid white;
-  }
-  .card-right{
-    border-left: 1px solid white;
-    border-right: 1px solid white;
-    width: 190px;
-}
-.card-left {
-    border-right: 1px solid white;
-    border-left: 1px solid white; 
-    width: 190px;
-}
-.trust {
-  flex-direction: column;
-  margin-left: 25vw;
+/* --- Mobile Card Styles (Horizontal Scroll) --- */
+@media (max-width: 768px) {
+    .trust {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1.5rem;
+        padding: 3rem 1.5rem; /* More padding for float effect */
+        margin: 0;
+        width: 100%;
+        justify-content: flex-start;
+        align-items: center;
+        -webkit-overflow-scrolling: touch;
+        /* Fade edges to indicate scrolling */
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 90%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, black 5%, black 90%, transparent 100%);
+    }
+    
+    /* Hide scrollbar */
+    .trust::-webkit-scrollbar {
+        display: none;
+    }
+
+    .side-card, .card {
+        flex: 0 0 80vw; /* Width relative to viewport to ensure peeking */
+        max-width: 320px;
+        height: 400px;
+        scroll-snap-align: center;
+        margin: 0;
+        position: relative;
+    }
+
+    /* Premium Glassmorphism for Side Cards */
+    .side-card {
+        background: rgba(18, 18, 24, 0.7);
+        border-radius: 24px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        
+        /* Gradient Border */
+        border: 1px solid transparent;
+        background-image: linear-gradient(rgba(18, 18, 24, 0.7), rgba(18, 18, 24, 0.7)), 
+                          linear-gradient(135deg, rgba(97, 218, 251, 0.5), rgba(225, 71, 230, 0.5));
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        transition: transform 0.3s ease;
+    }
+
+    /* Reset borders from desktop */
+    .card-left, .card-right {
+        border: none;
+        padding: 2rem;
+    }
+
+    .side-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(90deg, #61DAFB, #E147E6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .side-card p {
+        font-size: 1.1rem;
+        text-align: center;
+        margin: 0;
+        line-height: 1.6;
+        color: #e0e0e0;
+    }
+
+    /* Floating animation for alive feel */
+    .side-card, .card {
+        animation: mobileFloat 6s ease-in-out infinite;
+    }
+    
+    .card {
+        animation-delay: 1s;
+    }
+    
+    .card-right {
+        animation-delay: 2s;
+    }
+
+    @keyframes mobileFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    /* Add a subtle "Swipe" hint animation on the container */
+    .trust {
+        background: radial-gradient(circle at center, rgba(97, 218, 251, 0.05) 0%, transparent 70%);
+    }
 }
 
-.card-left h3 {
-    font-size: 1.3rem;
+/* --- Scroll Hint Animation --- */
+.scroll-hint-container {
+    display: none;
 }
 
-.card-left p {
-    text-align: center;
-    margin-bottom: 3vw;
-    font-size: 0.8rem;
+@media (max-width: 768px) {
+    .scroll-hint-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: -1rem;
+        margin-bottom: 2rem;
+        opacity: 0.8;
+        animation: fadeOutHint 3s ease-in-out 5s forwards; /* Disappear after 5s */
+    }
+
+    .scroll-hint-text {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .scroll-hint-arrow {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: bounceRight 1.5s infinite;
+    }
+
+    @keyframes bounceRight {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(10px); }
+    }
+    
+    @keyframes fadeOutHint {
+        to { opacity: 0; visibility: hidden; }
+    }
 }
 
-.card-right p {
-    text-align: center;
-    margin-bottom: 3vw;
-    font-size: 0.8rem;
+@keyframes floatCard {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 
-.card-right h3 {
-    font-size: 1.3rem;
-}
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
 }

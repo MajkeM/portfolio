@@ -18,7 +18,8 @@ body {
     color: #E0E0E0;
     background-color: #0A0A0A;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     transition: background 1s ease;
     background: radial-gradient(ellipse at bottom, var(--bg-color-start) 0%, #0A0A0A 60%);
 }
@@ -187,7 +188,7 @@ nav {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 5.5rem;
+    margin-top: 3rem;
 }
 
 .nav-arrow {
@@ -239,6 +240,7 @@ nav {
 .hero-visuals {
     flex-basis: 55%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     perspective: 1400px;
@@ -418,54 +420,168 @@ nav {
 /* === PŘIDÁNO ZDE: Responzivní úpravy pro navigaci === */
 @media (max-width: 992px) {
     .hero-section {
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: column-reverse; /* Visuals on top, text below */
+        justify-content: flex-start;
         padding: 6rem 1rem 2rem 1rem;
-        gap: 3rem;
+        gap: 2rem;
         text-align: center;
+        height: auto;
+        min-height: auto;
     }
 
     .hero-content {
         flex-basis: auto;
+        width: 100%;
         max-width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .skills-descriptions {
+        width: 100%;
+        max-width: 500px;
     }
 
     .hero-title {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        margin-top: 1rem;
     }
 
     .hero-subtitle {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
     }
 
     .hero-visuals {
         flex-basis: auto;
         width: 100%;
-        height: 300px;
-        /* Ensure space for orbit */
+        height: auto;
+        min-height: 350px;
+        margin-top: 1rem;
     }
 
     .skills-orbit {
-        transform: rotateX(10deg) scale(0.8);
-        /* Scale down slightly */
+        transform: rotateX(10deg) scale(0.7);
     }
-
+    
     .carousel-navigation {
-        margin-top: 2rem;
-        justify-content: center;
-        width: 100%;
+        margin-top: 1rem;
+    }
+}
+/* === Mobile Responsive Adjustments === */
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding-top: 8rem;
+        gap: 2rem;
     }
 
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .skill-node {
+        --orbit-radius: 160px; /* Smaller radius for tablets/large phones */
+        width: 70px;
+        height: 70px;
+    }
+
+    .skill-node img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .certificates-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .highlight-text {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .hero-visuals {
+        height: 250px;
+    }
+
+    .skill-node {
+        --orbit-radius: 110px; /* Even smaller for mobile */
+        width: 60px;
+        height: 60px;
+    }
+
+    .skill-node img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .carousel-navigation {
+        gap: 1rem;
+    }
+    
     .nav-arrow {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .certificates-gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+        gap: 0.5rem;
+    }
+    
+    .languege {
+        width: 40px;
+        min-width: 40px;
+        top: 2vh;
+        right: 1rem;
+    }
+    
+    nav {
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .logo-img {
+        height: 2rem;
+        margin-right: 0.5rem;
+    }
+    
+    .nav-links a {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
     }
 
-    .nav-arrow svg {
-        width: 24px;
-        height: 24px;
+    .skill-card {
+        padding: 1.5rem;
+    }
+
+    .certificates-section {
+        text-align: center;
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+
+    .certificate-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 0.95rem;
     }
 }

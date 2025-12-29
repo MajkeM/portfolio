@@ -17,7 +17,7 @@
 
 /* === FONTS === */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Dancing+Script:wght@400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Dancing+Script:wght@400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 * {
@@ -684,7 +684,7 @@ nav {
 .box-1 {
     color: white;
     margin-top: 0;
-    margin-left: 0;
+    margin-left: 25%;
     height: 100vh;
     z-index: 1;
     display: flex;
@@ -3391,22 +3391,24 @@ html {
         margin-right: auto;
     }
 
+    .hero-text-content h1{
+        font-size: 5rem;
+        margin-left: 10%;
+    }
+    .hero-text-content p{
+        font-size: 1.5rem;
+        margin-left: 10%;
+    }
+
     /* Keep existing Box 2 adjustments */
     .line-container {
         display: none;
     }
 
-    #iphone {
-        width: 130%;
-        height: 130%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        margin-top: 0;
-    }
+   
 
     .box-2-header h2 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         position: relative;
         top: 9vw;
     }
@@ -3414,7 +3416,8 @@ html {
     .box-2-skill {
         position: relative;
         right: 1.8vw;
-        width: 95%;
+        width: 85%;
+        margin-left: 17%;
         height: auto;
         padding: 0.8rem;
     }
@@ -3482,20 +3485,19 @@ html {
         box-sizing: border-box;
     }
 
+    .iphone-time{
+        display:none;
+    }
+
     .box-2 {
-        height: 50vh !important;
-        min-height: 50vh;
-        max-height: 50vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding: 1rem 0.5rem;
-        box-sizing: border-box;
-        position: static;
-        transform: none !important;
+        height: 0px !important;
+        padding: 0;
+        margin: 0;
+        display: none;
+    }
+
+    .strip1, .strip2, .strip3, .strip4, .strip5, .strip6, .strip7, .strip8, .strip9, .strip10{
+        display:none;
     }
 
     #iphone {
@@ -3513,16 +3515,7 @@ html {
     }
 
     .box-2-skills {
-        width: 100%;
-        max-width: 100%;
-        padding: 0;
-        position: static;
-        transform: none;
-        top: auto;
-        left: auto;
-        width: 50vw;
-        max-width: 85vw;
-        margin: 0 auto;
+        display: none;
     }
 
     .box-2-skill {
@@ -4088,7 +4081,12 @@ html {
     }
 
     #about {
-        margin-top: 12vh;
+        margin-top: 4rem !important;
+        margin-bottom: -1rem !important;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+        text-align: center;
     }
 }
 
@@ -4299,5 +4297,32 @@ html {
         grid-template-columns: 1fr;
         /* Stack on mobile */
         padding: 0 2rem;
+    }
+}
+/* --- Brush Stroke Animation Styles --- */
+.brush-stroke {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    z-index: -1;
+    display: none; /* Hidden by default on desktop */
+    pointer-events: none;
+}
+
+.brush-stroke path {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+}
+
+@media (max-width: 768px) {
+    .brush-stroke {
+        display: block; /* Visible on mobile */
+    }
+
+    .iphone-time,
+    .box-2-skills {
+        display: none !important;
     }
 }
