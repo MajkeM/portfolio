@@ -373,7 +373,7 @@
         margin-top: -1rem;
         margin-bottom: 2rem;
         opacity: 0.8;
-        animation: fadeOutHint 3s ease-in-out 5s forwards; /* Disappear after 5s */
+        animation: fadeOutHint 3s ease-in-out 15s forwards; /* Disappear after 15s */
     }
 
     .scroll-hint-text {
